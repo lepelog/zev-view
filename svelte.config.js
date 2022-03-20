@@ -9,17 +9,17 @@ const config = {
 
   kit: {
     adapter: adapter({
-      // pages: "build",
-      // assets: "build"
+      pages: "build",
+      assets: "build"
     }),
+
+    prerender: {
+      default: true
+    },
     
     paths: {
       base: "/zev-view",
     },
-
-    prerender: {
-      enabled: false,
-    }
   },
 };
 
