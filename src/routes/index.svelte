@@ -28,7 +28,7 @@
   <title>Home</title>
 </svelte:head>
 
-<h1>Hi</h1>
+<h1>ZEV Viewer</h1>
 
 {#await getAllNames()}
   Fetching all names...

@@ -7,7 +7,7 @@
 </main>
 
 <footer>
-  <p>Source code: Somewhere</p>
+  <p><a href="https://lepelog.github.io/zev-view">Source code</a></p>
 </footer>
 
 <style>
