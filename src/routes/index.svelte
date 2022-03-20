@@ -1,13 +1,17 @@
 <script lang="ts">
   import NameAccordeon from '$lib/NameAccordeon.svelte';
   import { getAllNames } from '$lib/zev-src';
-  import { base } from "$app/paths";
+  import { base } from '$app/paths';
 
   let searchValue = '';
   let searchResults: [string, string][] = [];
 
   function linkFunc(zev: string, event: string): string {
-    return `${base}/view/${zev}/${event}`;
+    const params = new URLSearchParams({
+      eventfile: zev,
+      eventname: event
+    }).toString();
+    return `${base}/view?${params}`;
   }
 
   function doSearch(names: Record<string, string[]>) {
@@ -39,7 +43,7 @@
   {:else}
     <ul>
       {#each searchResults as [zev, event]}
-        <li><a href={`${base}/view/${zev}/${event}`}>{event}</a></li>
+        <li><a href={linkFunc(zev, event)}>{event}</a></li>
       {/each}
     </ul>
   {/if}

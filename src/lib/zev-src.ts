@@ -1,5 +1,5 @@
 import init, { do_parse_zev, EventCollection } from '$lib/zevlib';
-import { base } from "$app/paths";
+import { base } from '$app/paths';
 
 const repoUrl = 'https://raw.githubusercontent.com/lepelog/skywardsword-tools/master/allzev';
 

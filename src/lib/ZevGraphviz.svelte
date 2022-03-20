@@ -3,8 +3,8 @@
   import { onMount } from 'svelte';
   import { wasmFolder } from '@hpcc-js/wasm';
   import { getDotSrcForEvent } from './zev-src';
-  import { browser } from "$app/env";
-import { base } from '$app/paths';
+  import { browser } from '$app/env';
+  import { base } from '$app/paths';
 
   export let zevname: string;
   export let eventname: string;

@@ -9,18 +9,20 @@ const config = {
 
   kit: {
     adapter: adapter({
-      pages: "build",
-      assets: "build"
+      pages: 'build',
+      assets: 'build',
+      fallback: null,
+      precompress: false
     }),
 
     prerender: {
       default: true
     },
-    
+
     paths: {
-      base: "/zev-view",
-    },
-  },
+      base: '/zev-view'
+    }
+  }
 };
 
 export default config;
