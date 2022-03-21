@@ -1,4 +1,4 @@
-import init, { do_parse_zev, EventCollection } from '$lib/zevlib';
+import init, { do_parse_zev, EventCollection, EventViewer } from '$lib/zevlib';
 import { base } from '$app/paths';
 
 const repoUrl = 'https://raw.githubusercontent.com/lepelog/skywardsword-tools/master/allzev';
@@ -170,8 +170,12 @@ async function fetchNames(name: string): Promise<[string, string[]]> {
   return [name, names];
 }
 
-export async function getAllNames(): Promise<Record<string, string[]>> {
+async function doInit(): Promise<void> {
   await init(`${base}/zeldaevent_js_bg.wasm`);
+}
+
+export async function getAllNames(): Promise<Record<string, string[]>> {
+  await doInit();
   if (cachedNames === undefined) {
     const responses = await Promise.all(allFiles.map(fetchNames));
     cachedNames = Object.fromEntries(responses);
@@ -180,7 +184,13 @@ export async function getAllNames(): Promise<Record<string, string[]>> {
 }
 
 export async function getDotSrcForEvent(zev: string, event: string): Promise<string> {
-  await init(`${base}/zeldaevent_js_bg.wasm`);
+  await doInit();
   const parsed = await doFetchSingle(zev);
   return parsed.get_dot_by_name(event);
+}
+
+export async function getEventViewerForEvent(zev: string, event: string): Promise<EventViewer> {
+  await doInit();
+  const parsed = await doFetchSingle(zev);
+  return parsed.get_event_viewer(event);
 }

@@ -15,7 +15,7 @@
 {#if eventfile && eventname}
   <h1>{eventfile}/{eventname}</h1>
 
-  <a href={base}>To index</a>
+  <a href={`${base}/`}>To index</a>
 
   <ZevGraphviz zevname={eventfile} {eventname} />
 {:else}
