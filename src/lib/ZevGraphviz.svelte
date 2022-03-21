@@ -2,7 +2,7 @@
   import { graphviz } from 'd3-graphviz';
   import { onDestroy, onMount } from 'svelte';
   import { wasmFolder } from '@hpcc-js/wasm';
-  import { getDotSrcForEvent, getEventViewerForEvent } from './zev-src';
+  import { getEventViewerForEvent } from './zev-src';
   import { browser } from '$app/env';
   import { base } from '$app/paths';
   import type { EventViewer } from './zevlib';
@@ -23,8 +23,7 @@
   let eventView: EventViewer | undefined;
 
   $: {
-    eventView?.set_select_step(selectedActor, selectedStep);
-    doRender();
+    updateTitleDetails(selectedActor, selectedStep);
   }
 
   onMount(async () => {
@@ -35,8 +34,30 @@
     }
   });
 
+  function updateTitleDetails(selectedActor: number, selectedStep: number) {
+    eventView?.set_select_step(selectedActor, selectedStep);
+    const id = `a_${selectedActor}_${selectedStep}`;
+    detailsTitle = eventView?.get_details_title();
+    detailsDesc = eventView?.get_details();
+    // update selected color
+    selectAll('.node').each(function () {
+      const node = select(this);
+      console.log(
+        node.selectChildren('ellipse').attr('stroke'),
+        node.attr('id'),
+        node.attr('color')
+      );
+      if (node.attr('id') == id) {
+        node.selectChildren('ellipse').attr('stroke', 'red');
+      } else {
+        node.selectChildren('ellipse').attr('stroke', 'black');
+      }
+    });
+  }
+
   function doRender() {
     if (eventView !== undefined) {
+      eventView.set_select_step(selectedActor, selectedStep);
       graphviz(graphcontainer)
         .renderDot(eventView.to_dot_string())
         .on('end', function () {
@@ -57,10 +78,27 @@
   }
 
   onDestroy(() => {
-    if (eventView !== undefined) {
-      eventView.free();
-    }
+    eventView?.free();
   });
+
+  function processDetails(details: string): string {
+    const detailsParsed = JSON.parse(details);
+
+    const data = detailsParsed.data;
+    detailsParsed.data = Object.fromEntries(
+      data.map((datum) => {
+        return [
+          datum.name,
+          Object.fromEntries([
+            ['unk1', datum.unk1],
+            [datum.values.t, datum.values.c]
+          ])
+        ];
+      })
+    );
+
+    return JSON.stringify(detailsParsed, null, 2);
+  }
 </script>
 
 {#if error}
@@ -71,7 +109,7 @@
   {#if detailsDesc}
     <div class="graphdetails">
       <h2>{detailsTitle}</h2>
-      <pre>{detailsDesc}</pre>
+      <pre>{processDetails(detailsDesc)}</pre>
     </div>
   {/if}
 
