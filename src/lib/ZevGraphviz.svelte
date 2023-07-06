@@ -1,10 +1,10 @@
 <script lang="ts">
   import { graphviz } from 'd3-graphviz';
   import { onDestroy, onMount } from 'svelte';
-  import { wasmFolder } from '@hpcc-js/wasm';
+  // import { Graphviz } from '@hpcc-js/wasm';
   import { getEventViewerForEvent } from './zev-src';
   import { browser } from '$app/env';
-  import { base } from '$app/paths';
+  // import { base } from '$app/paths';
   import type { EventViewer } from './zevlib';
   import { select, selectAll } from 'd3-selection';
 
@@ -28,7 +28,7 @@
 
   onMount(async () => {
     if (browser) {
-      wasmFolder(base);
+      // await Graphviz.load();
       eventView = await getEventViewerForEvent(zevname, eventname);
       doRender();
     }
