@@ -2,7 +2,7 @@
     export const prerender = false;
 </script> -->
 <script lang="ts">
-  import { browser } from '$app/env';
+  import { browser } from '$app/environment';
 
   import { base } from '$app/paths';
   import { page } from '$app/stores';

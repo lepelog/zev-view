@@ -11,12 +11,9 @@ const config = {
     adapter: adapter({
       pages: 'build',
       assets: 'build',
-      precompress: false
+      precompress: false,
+      fallback: "index.html"
     }),
-
-    prerender: {
-      default: true
-    },
 
     paths: {
       base: '/zev-view'

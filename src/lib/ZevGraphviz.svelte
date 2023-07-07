@@ -3,7 +3,7 @@
   import { onDestroy, onMount } from 'svelte';
   // import { Graphviz } from '@hpcc-js/wasm';
   import { getEventViewerForEvent } from './zev-src';
-  import { browser } from '$app/env';
+  import { browser } from '$app/environment';
   // import { base } from '$app/paths';
   import type { EventViewer } from './zevlib';
   import { select, selectAll } from 'd3-selection';
