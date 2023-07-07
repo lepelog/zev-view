@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Zev Viewer" />
+    <link rel="icon" href="/zev-view/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+		<link rel="modulepreload" href="/zev-view/_app/immutable/entry/start.691d84ef.js">
+		<link rel="modulepreload" href="/zev-view/_app/immutable/chunks/scheduler.037f7bd6.js">
+		<link rel="modulepreload" href="/zev-view/_app/immutable/chunks/singletons.08d26bb4.js">
+		<link rel="modulepreload" href="/zev-view/_app/immutable/chunks/paths.eca2aec5.js">
+		<link rel="modulepreload" href="/zev-view/_app/immutable/entry/app.727cf2c3.js">
+		<link rel="modulepreload" href="/zev-view/_app/immutable/chunks/index.4bb65ed1.js">
+  </head>
+  <body>
+    <div>
+			<script>
+				{
+					__sveltekit_1tayjhv = {
+						assets: "/zev-view",
+						base: "/zev-view",
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("/zev-view/_app/immutable/entry/start.691d84ef.js"),
+						import("/zev-view/_app/immutable/entry/app.727cf2c3.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>
